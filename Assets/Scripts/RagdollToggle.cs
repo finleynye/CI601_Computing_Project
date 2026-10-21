@@ -1,6 +1,9 @@
+using Unity.VisualScripting;
 using UnityEngine;
 public class RagdollToggle : MonoBehaviour
 {
+    public Transform rootTransform;
+    [HideInInspector] public Vector3 startPosition;
     private Rigidbody[] rigidbodies;
     private Rigidbody rootRigidbody;
     private Collider[] ragdollColliders;
@@ -10,8 +13,11 @@ public class RagdollToggle : MonoBehaviour
     public bool isRagdolling;
     void Awake()
     {
+        startPosition = transform.position;
         rootCollider = GetComponentInParent<CapsuleCollider>();
         rootRigidbody = GetComponentInParent<Rigidbody>();
+
+        rootTransform.position = startPosition;
 
         rigidbodies = GetComponentsInChildren<Rigidbody>();
         ragdollColliders = GetComponentsInChildren<Collider>();
